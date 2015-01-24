@@ -1,0 +1,47 @@
+.r, .c { position: absolute; }
+.r { left: 0; right: 0; padding-left: 15px; padding-right: 15px; }
+.c { top: 0; bottom: 0; }
+.scroll-x { overflow-x: auto; }
+.scroll-y { overflow-y: auto; }
+
+#header.r { height: 65px; top: 0; background-color: rgb(77, 140, 160); color: white;}
+#content.r { top: 65px; bottom: 0; padding-left: 0px; }
+#header form { margin-top: 15px; }
+
+#nav { left: 0; width: 250px; background-color: rgb(80, 80, 80); }
+#main { left: 250px; right: 0; }
+
+.logo { height: 45px; margin-top: 10px; background-image: url('/public/images/IpreoTransparent.gif'); background-size: contain; background-repeat: no-repeat; }
+
+#nav .list-group-item { 
+	background-color: inherit;
+	border: none; 
+	border-bottom: 1px solid rgb(110, 110, 110);
+	border-radius: 0;
+	padding: 5px 15px;
+}
+
+#nav .list-group-item {
+	color: rgb(239, 115, 61);
+}
+
+#nav .list-group-item:hover {
+	background-color: white;
+	color: rgb(77, 140, 160);
+}
+
+#header .icon-list {
+	text-align: right;
+	font-size: 150%;
+	line-height: 65px;
+	margin-bottom: 0px;
+}
+
+#header .icon-list > li {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+#header .icon-list > li > a {
+	color: white;
+}
