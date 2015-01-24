@@ -1,0 +1,12 @@
+doctype html
+html(ng-app='buysideApp')
+	head
+		include head
+	body
+		#header.r
+			include header
+		#content.r
+			#nav.c.scroll-y
+				include nav
+			#main.c.scroll-y.container-fluid
+				block content

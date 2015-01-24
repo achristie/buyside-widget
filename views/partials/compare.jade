@@ -1,0 +1,7 @@
+.row
+	.col-md-3
+		button.btn.btn-primary(type='button', ng-click='getInv(606617)') Get 606617
+	.col-md-9
+		ul
+			li(ng-repeat='i in investors')
+				p {{i.name}}
