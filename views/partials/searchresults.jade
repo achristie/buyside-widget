@@ -1,1 +1,11 @@
-h3 search results
+h4 Search Results - {{ q }}
+
+row
+	.col-xs-12
+		.panel.panel-default
+			.panel-heading
+				h2.panel-title Institutions
+			.panel-body
+				.col-xs-3.entity-list-item(ng-repeat='e in entities')
+					span.small {{ e.name }}
+

@@ -43,3 +43,7 @@
 #header .icon-list > li > a {
 	color: white;
 }
+
+.entity-list-item {
+	height: 80px;
+}

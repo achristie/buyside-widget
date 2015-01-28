@@ -4,9 +4,9 @@
 	.col-xs-7
 		form
 			.input-group(ng-controller='SearchCtrl')
-				input.form-control#global-search(type='text', placeholder='Search', name='q', ng-model='q', ng-model-options='{ debounce: 250 }')
+				input.form-control#global-search(type='text', placeholder='Search', name='q', ng-model='q', ng-model-options='{ debounce: 1 }', ng-keypress='$event.which == 13 ? search($event) : null')
 				.input-group-btn
-					button.btn.btn-default
+					button.btn.btn-default(ng-click='search($event)')
 						i.glyphicon.glyphicon-search
 	.col-xs-2
 		ul.list-inline.icon-list
