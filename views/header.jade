@@ -3,8 +3,8 @@
 		.logo
 	.col-xs-7
 		form
-			.input-group
-				input.form-control#global-search(type='text', placeholder='Search', name='q')
+			.input-group(ng-controller='SearchCtrl')
+				input.form-control#global-search(type='text', placeholder='Search', name='q', ng-model='q', ng-model-options='{ debounce: 250 }')
 				.input-group-btn
 					button.btn.btn-default
 						i.glyphicon.glyphicon-search

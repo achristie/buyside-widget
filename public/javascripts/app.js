@@ -15,6 +15,10 @@ bsApp.config(['$routeProvider', '$locationProvider',
 				templateUrl: 'partials/listmanagement',
 				controller: 'ListMgmtCtrl'
 			})
+			.when('/search', {
+				templateUrl: 'partials/searchresults',
+				controller: 'SearchResCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
