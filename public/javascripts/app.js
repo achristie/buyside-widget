@@ -1,4 +1,4 @@
-var bsApp = angular.module('buysideApp', ['d3', 'ngAnimate', 'ngRoute']);
+var bsApp = angular.module('buysideApp', ['d3', 'ngAnimate', 'ngRoute', 'angular.filter', 'wu.masonry']);
 
 bsApp.config(['$routeProvider', '$locationProvider',
 	function ($routeProvider, $locationProvider) {

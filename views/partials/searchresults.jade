@@ -1,11 +1,12 @@
 h4 Search Results - {{ q }}
+hr.no-bot-margin
 
-row
+.row(ng-repeat='(k, v) in entities | groupBy: "type" | toArray: true | orderBy: min')
 	.col-xs-12
-		.panel.panel-default
-			.panel-heading
-				h2.panel-title Institutions
-			.panel-body
-				.col-xs-3.entity-list-item(ng-repeat='e in entities')
-					span.small {{ e.name }}
+		h3{{ v.$key }} 
+		.col-xs-3.entity-list-item(ng-repeat='e in v | orderBy: "-investorAttributes.eqAssets"')
+			span.text-muted {{ e.name }}
 
+masonry(load-images='false')
+	.masonry-brick.well.entity-list-item(ng-repeat='e in entities')
+		{{e.name}}

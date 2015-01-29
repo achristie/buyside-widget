@@ -1,4 +1,4 @@
-bsApp.factory('globalsearch', function ($http, $q) {
+bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 	Entity = function (d) {
 		var self = this;
 
@@ -35,11 +35,20 @@ bsApp.factory('globalsearch', function ($http, $q) {
 		},
 		getEntities: function (q) {
 			var ent = [];
-			var url = 'https://davos.app.ipreo.com/rest/api/Andrew/BSWSearch.svc/?components=Investor&q=' + q + '&$format=json&$callback=JSON_CALLBACK';
+			var o = {
+				components: 'Investor',
+				variables: 'q=' + q,
+				path: 'api/Andrew/BSWSearch'
+			};
+
+
+			//var url = 'https://davos.app.ipreo.com/rest/api/Andrew/BSWSearch.svc/?components=Investor&q=' + q + '&$format=json&$callback=JSON_CALLBACK';
+			var url = davosUrl.getUrl(o);
+			console.log(o);
 
 			return $http.jsonp(url).then(function (d) {
 				$.each(d.data.Investor, function (i, v) {
-					v.type = "investor";
+					v.type = v.fund_ind ? "Fund" : "Institution";
 					v.investorAttributes = new InvestorAttributes(v);
 					ent.push(new Entity(v));
 				});

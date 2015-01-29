@@ -1,4 +1,4 @@
-bsApp.controller('SearchResCtrl', function ($scope, $location, globalsearch) {
+bsApp.controller('SearchResCtrl', function ($scope, $location, $filter, globalsearch) {
 	$scope.q = $location.search().q;
 	$scope.entities = [];
 
@@ -7,4 +7,8 @@ bsApp.controller('SearchResCtrl', function ($scope, $location, globalsearch) {
 			$scope.entities = d;
 		});
 	});
+
+	$scope.min = function(arr) {
+		return $filter('min')($filter('map')(arr, 'id'));
+	}
 });
