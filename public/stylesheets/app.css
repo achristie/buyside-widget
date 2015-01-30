@@ -8,7 +8,7 @@
 #content.r { top: 65px; bottom: 0; padding-left: 0px; }
 #header form { margin-top: 15px; }
 
-#nav { left: 0; width: 200px; background-color: rgb(230, 230, 230); }
+#nav { left: 0; width: 200px; background-color: rgb(4, 32, 41); }
 #main { left: 200px; right: 0; }
 
 .logo { height: 45px; margin-top: 10px; background-image: url('/public/images/IpreoTransparent.gif'); background-size: contain; background-repeat: no-repeat; }
@@ -21,7 +21,7 @@
 }
 
 #nav .list-group-item {
-	color: rgb(37, 122, 153);
+	color: rgb(67, 136, 213);
 }
 
 #nav .list-group-item:hover {
@@ -47,10 +47,29 @@
 .no-bot-margin { margin-bottom: 0; }
 
 .entity-list-item {
-	border-color:#eee;
-    margin-bottom: 10px;
-    min-height:80px;
-    width:20%;
-    position: relative;
+	/*width: calc(20% - 14px);*/
+	width: calc(25% - 15px);
 }
+
+.entity-list-item .list-group-item {
+	padding: 0px;
+}
+
+.entity-list-item .list-group-item-heading {
+	background-color: rgb(233, 240, 242);
+	padding: 10px 10px;
+	margin-bottom: 10px;
+	overflow: hidden;
+	text-overflow: clip;
+	white-space: normal;
+}
+
+.entity-list-item.active {
+	width: calc(50% - 50/3px);
+}
+
+//ipreo db = 0, 139, 207
+//ipreo lb = 165, 197, 233
+//ipreo org = 251, 162, 16
+
 

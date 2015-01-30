@@ -1,12 +1,23 @@
 h4 Search Results - {{ q }}
 hr.no-bot-margin
 
-.row(ng-repeat='(k, v) in entities | groupBy: "type" | toArray: true | orderBy: min')
-	.col-xs-12
-		h3{{ v.$key }} 
-		.col-xs-3.entity-list-item(ng-repeat='e in v | orderBy: "-investorAttributes.eqAssets"')
-			span.text-muted {{ e.name }}
+//
+	.row(ng-repeat='(k, v) in entities | groupBy: "type" | toArray: true | orderBy: min')
+		.col-xs-12
+			h3{{ v.$key }} 
+			.col-xs-3.entity-list-item(ng-repeat='e in v | orderBy: "-investorAttributes.eqAssets"')
+				span.text-muted {{ e.name }}
 
-masonry(load-images='false')
-	.masonry-brick.well.entity-list-item(ng-repeat='e in entities')
-		{{e.name}}
+.row(ng-repeat='(k,v) in entities | groupBy: "type" | toArray: true | orderBy: min')
+	.col-xs-12
+		h3 {{ v.$key }}
+	masonry.col-xs-12(load-images='false', masonry-options="{ gutter: 10 }")
+		.masonry-brick.list-group.entity-list-item(ng-repeat='e in v | orderBy: "-investorAttributes.eqAssets"', ng-click='toggleActive(e, $index)', ng-class="{ 'active': '$index == activeEntity.index && e.type == v.&key' }")
+			a.list-group-item
+				h6.list-group-item-heading.text-muted {{ e.name }}
+				p {{ e.investorAttributes.eqAssets}}
+
+//
+	.col-xs-12(masonry='{"transitionDuration": "0.4s", "itemSelector": ".tile"}')
+		.masonry-tile.well(ng-repeat='e in entities', ng-click='console.log(e)')
+			{{ e.name }}
