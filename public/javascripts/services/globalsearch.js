@@ -36,7 +36,7 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 		getEntities: function (q) {
 			var ent = [];
 			var o = {
-				components: 'Investor',
+				components: 'Investor,Funds',
 				variables: 'q=' + q,
 				path: 'api/Andrew/BSWSearch'
 			};
@@ -48,10 +48,17 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 
 			return $http.jsonp(url).then(function (d) {
 				$.each(d.data.Investor, function (i, v) {
-					v.type = v.fund_ind ? "Fund" : "Institution";
+					v.type = "Institution";
 					v.investorAttributes = new InvestorAttributes(v);
 					ent.push(new Entity(v));
 				});
+
+				$.each(d.data.Funds, function (i, v) {
+					v.type = "Fund";
+					v.investorAttributes = new InvestorAttributes(v);
+					ent.push(new Entity(v));
+				});
+
 				return ent;
 			});
 		}

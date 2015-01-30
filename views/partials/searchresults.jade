@@ -1,23 +1,22 @@
-h4 Search Results - {{ q }}
-hr.no-bot-margin
+.row
+	.col-xs-9
+		h4 Search Results - {{ q }}
+	.col-xs-3
+		ul.list-inline.search-filters
+			li: a.clickable.inst-color()
+				i.fa.fa-sitemap
+			li: a.clickable.fund-color()
+				i.fa.fa-bank
+			li: a.clickable.contact-color()
+				i.fa.fa-users
 
-//
-	.row(ng-repeat='(k, v) in entities | groupBy: "type" | toArray: true | orderBy: min')
-		.col-xs-12
-			h3{{ v.$key }} 
-			.col-xs-3.entity-list-item(ng-repeat='e in v | orderBy: "-investorAttributes.eqAssets"')
-				span.text-muted {{ e.name }}
+hr.no-tb-margin
 
 .row(ng-repeat='(k,v) in entities | groupBy: "type" | toArray: true | orderBy: min')
 	.col-xs-12
-		h3 {{ v.$key }}
+		h3(ng-class='{"inst-color": v.$key == "Institution", "fund-color": v.$key == "Fund", "contact-color": v.$key == "Contact"}') {{ v.$key }}
 	masonry.col-xs-12(load-images='false', masonry-options="{ gutter: 10 }")
 		.masonry-brick.list-group.entity-list-item(ng-repeat='e in v | orderBy: "-investorAttributes.eqAssets"', ng-click='toggleActive(e, $index)', ng-class="{ 'active': '$index == activeEntity.index && e.type == v.&key' }")
 			a.list-group-item
 				h6.list-group-item-heading.text-muted {{ e.name }}
 				p {{ e.investorAttributes.eqAssets}}
-
-//
-	.col-xs-12(masonry='{"transitionDuration": "0.4s", "itemSelector": ".tile"}')
-		.masonry-tile.well(ng-repeat='e in entities', ng-click='console.log(e)')
-			{{ e.name }}
