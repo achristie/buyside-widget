@@ -1,7 +1,7 @@
 bsApp.factory('davosUrl', function () {
 	
 	//set these!!
-	var env = 'PROD',
+	var env = 'QX',
 		type = 'rest';
 		token = '';
 

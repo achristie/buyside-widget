@@ -2,8 +2,8 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 	Entity = function (d) {
 		var self = this;
 
-		self.id = d.investor_id;
-		self.name = d.investor_name;
+		self.id = d.investor_id || d.contact_id;
+		self.name = d.investor_name || d.first_nm + ' ' + d.last_nm;
 		self.type = d.type;
 		self.investorAttributes = d.investorAttributes || null;
 		self.contactAttributes = d.contactAttributes || null;
@@ -20,7 +20,12 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 	}
 
 	ContactAttributes = function (d) {
+		var self = this;
+
 		self.name = d.first_nm + ' ' + d.last_nm;
+		self.roles = d.role_names;
+		self.funds = [];
+
 	}
 
 	return {
@@ -36,9 +41,9 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 		getEntities: function (q) {
 			var ent = [];
 			var o = {
-				components: 'Investor,Funds',
+				components: 'Investor,Funds,ContactFundsManaged',
 				variables: 'q=' + q,
-				path: 'api/Andrew/BSWSearch'
+				path: 'api/Andrew/BSW/BSWSearch'
 			};
 
 
@@ -58,6 +63,19 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 					v.investorAttributes = new InvestorAttributes(v);
 					ent.push(new Entity(v));
 				});
+
+				$.each(d.data.ContactFundsManaged, function (i, v) {
+					v.type = "Contact";
+					var idx = ent.indexOf(v.id);
+					if (idx < 0) {
+						//create new
+						v.contactAttributes = new ContactAttributes(v);
+						ent.push(new Entity(v));
+					} else {
+						var e = ent[idx]
+						e.contactAttributes.funds.push(v)
+					}
+				})
 
 				return ent;
 			});
