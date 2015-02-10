@@ -5,6 +5,7 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 		self.id = d.investor_id || d.contact_id;
 		self.name = d.investor_name || d.first_nm + ' ' + d.last_nm;
 		self.type = d.type;
+		self.isExpanded = false;
 		self.investorAttributes = d.investorAttributes || null;
 		self.contactAttributes = d.contactAttributes || null;
 	}
@@ -41,7 +42,7 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 		getEntities: function (q) {
 			var ent = [];
 			var o = {
-				components: 'Investor,Funds,ContactFundsManaged',
+				components: 'Investor,Funds',
 				variables: 'q=' + q,
 				path: 'api/Andrew/BSW/BSWSearch'
 			};
@@ -63,7 +64,7 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 					v.investorAttributes = new InvestorAttributes(v);
 					ent.push(new Entity(v));
 				});
-
+				/*
 				$.each(d.data.ContactFundsManaged, function (i, v) {
 					v.type = "Contact";
 					var idx = ent.indexOf(v.id);
@@ -76,7 +77,7 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 						e.contactAttributes.funds.push(v)
 					}
 				})
-
+				*/
 				return ent;
 			});
 		}

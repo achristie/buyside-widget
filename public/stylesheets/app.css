@@ -8,8 +8,11 @@
 #content.r { top: 65px; bottom: 0; padding-left: 0px; }
 #header form { margin-top: 15px; }
 
-#nav { left: 0; width: 200px; background-color: rgb(4, 32, 41); }
-#main { left: 200px; right: 0; }
+.search-nav { height: 40px; border-bottom: 1px solid gainsboro; margin-right: 0;}
+.search-res { top: 40px; }
+
+#nav { left: 0; width: 150px; background-color: rgb(4, 32, 41); }
+#main { left: 150px; right: 0; }
 
 .logo { height: 45px; margin-top: 10px; background-image: url('/public/images/IpreoTransparent.gif'); background-size: contain; background-repeat: no-repeat; }
 
@@ -77,6 +80,9 @@
 	color: white;
 }
 
+.search-res h3 { margin-top: 10px;}
+.search-res .list-group { margin-bottom: 10px; }
+
 .no-tb-margin { margin-bottom: 0; margin-top: 0;  }
 
 .entity-list-item {
@@ -98,7 +104,7 @@
 }
 
 .entity-list-item.active {
-	width: calc(50% - 50/3px);
+	width: calc(50% - 25px);
 }
 
 //ipreo db = 0, 139, 207
