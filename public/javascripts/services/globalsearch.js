@@ -18,6 +18,38 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 		self.country = d.country;
 		self.city = d.city;
 		self.isFund = d.fund_ind;
+		self.invApproach = d.short_investment_approach_txt;
+		self.style = d.style_name;
+		self.turnover = d.turnover;
+		self.orientation = d.orientation;
+		self.fiAssets = d.fi_asset;
+		
+	}
+
+	Position = function (d) {
+		var self = this;
+
+		self.securityId = d.security_id;
+		self.ticker = d.ticker;
+		self.securityName = d.security_name;
+		self.shares = d.share_qty;
+		self.value = d.share_amount;
+		self.shareChange = d.qty_changed;
+		self.valueChange = d.share_amount_changed;
+	}
+
+	GeographyPosition = function (d) {
+		var self = this;
+
+		self.id = d.country_id;
+	}
+
+	IndustryPosition = function (d) {
+		var self = this;
+
+		self.id = d.industry_id;
+		self.name = d.industry_name;
+		self.parentId = 1;
 	}
 
 	ContactAttributes = function (d) {
@@ -29,6 +61,8 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 
 	}
 
+	var ent = [];
+
 	return {
 		Entity: function (d) {
 			return new Entity(d);
@@ -39,8 +73,13 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 		ContactAttributes: function (d) {
 			return new ContactAttributes(d);
 		},
+		getEntitiesDetailed: function (arr) {
+			var o = {
+				components: 'Ownership,OwnByInd,OwnByGeo'
+			}
+		},
 		getEntities: function (q) {
-			var ent = [];
+			ent = [];
 			var o = {
 				components: 'Investor,Funds',
 				variables: 'q=' + q,
@@ -78,6 +117,8 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 					}
 				})
 				*/
+
+
 				return ent;
 			});
 		}

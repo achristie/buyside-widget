@@ -1,0 +1,30 @@
+a.list-group-item(ng-show="!e.isExpanded")
+	h6.strong.list-group-item-heading.text-muted {{ e.name }}
+	.entity-details.small
+		{{ e.investorAttributes.city }} &bull; {{ e.investorAttributes.style}}
+a.list-group-item(ng-show="e.isExpanded")
+	h5.list-group-item-heading.text-muted {{ e.name }}
+	.entity-details
+		.row
+			.col-xs-3
+				.ent-attr: strong.small Equity Assets
+				.ent-attr: strong.small Fixed Income Assets
+				.ent-attr: strong.small City
+				.ent-attr: strong.small Country
+				.ent-attr: strong.small Style
+				.ent-attr: strong.small Orientation
+				.ent-attr: strong.small Turnover
+			.col-xs-3
+				.ent-attr.small {{ e.investorAttributes.eqAssets }}
+				.ent-attr.small {{ e.investorAttributes.fiAssets }}
+				.ent-attr.small {{ e.investorAttributes.city }}
+				.ent-attr.small {{ e.investorAttributes.country }}
+				.ent-attr.small {{ e.investorAttributes.style }}
+				.ent-attr.small {{ e.investorAttributes.orientation }}
+				.ent-attr.small {{ e.investorAttributes.turnover }}
+			.col-xs-6
+				bs-entity-charts(entity="e")
+		.row
+			.col-xs-12
+				h5 Investment Approach
+				.small {{ e.investorAttributes.invApproach }}

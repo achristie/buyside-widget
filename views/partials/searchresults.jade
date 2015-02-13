@@ -14,22 +14,8 @@
 	.row(ng-repeat='(k,v) in entities | groupBy: "type"')
 		.col-xs-12
 			h3(ng-class='{"inst-color": k == "Institution", "fund-color": k == "Fund", "contact-color": k == "Contact"}') {{ k }}s
-		masonry.col-xs-12(column-width="10", preserve-order="", load-images='false', masonry-options="{ gutter: 10, isAnimated: true }")
+		masonry.col-xs-12(column-width="1", preserve-order="", load-images='false', masonry-options="{ gutter: 10, isAnimated: true }")
 			.masonry-brick.list-group.entity-list-item.clickable(ng-repeat='e in v | orderBy: "-investorAttributes.eqAssets"', ng-click='toggleEntityView(e, $index)', ng-class="{ 'active': e.isExpanded }")
-				a.list-group-item(ng-show="!e.isExpanded")
-					h6.strong.list-group-item-heading.text-muted {{ e.name }}
-					p {{ e.investorAttributes.eqAssets}}
-				a.list-group-item(ng-show="e.isExpanded")
-					h6.list-group-item-heading {{ e.name }}
+					bs-entity-info(entity="e")
 
 
-
-//
-	.row(ng-repeat='(k,v) in entities | groupBy: "type" | toArray: true | orderBy: min')
-		.col-xs-12
-			h3(ng-class='{"inst-color": v.$key == "Institution", "fund-color": v.$key == "Fund", "contact-color": v.$key == "Contact"}') {{ v.$key }}
-		masonry.col-xs-12(column-width="10", preserve-order="", load-images='false', masonry-options="{ gutter: 10, isAnimated: true }")
-			.masonry-brick.list-group.entity-list-item.clickable(ng-repeat='e in v | orderBy: "-investorAttributes.eqAssets"', ng-click='toggleEntityView(e, $index)', ng-class="{ 'active': e.isExpanded }")
-				a.list-group-item
-					h6.list-group-item-heading.text-muted {{ e.name }}
-					p {{ e.investorAttributes.eqAssets}}

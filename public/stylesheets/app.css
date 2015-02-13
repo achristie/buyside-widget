@@ -92,20 +92,29 @@
 
 .entity-list-item .list-group-item {
 	padding: 0px;
+	box-shadow: 0 0 5px #ccc;
 }
 
 .entity-list-item .list-group-item-heading {
 	background-color: rgb(233, 240, 242);
 	padding: 10px 10px;
-	margin-bottom: 10px;
+	margin-bottom: 0;
 	overflow: hidden;
 	text-overflow: clip;
 	white-space: normal;
 }
 
 .entity-list-item.active {
-	width: calc(50% - 25px);
+	width: calc(75% - 28px);
 }
+
+.list-group-item > .entity-details {
+	padding: 5px 10px;
+}
+
+
+
+.ent-attr { height: 20px; line-height: 20px; }
 
 //ipreo db = 0, 139, 207
 //ipreo lb = 165, 197, 233
