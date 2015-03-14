@@ -25,3 +25,9 @@ bsApp.config(['$routeProvider', '$locationProvider',
 		$locationProvider.html5Mode(true);
 	}
 ]);
+
+bsApp.run(function (standingData) {
+	standingData.getData().then(function (d) {
+		console.log(d);
+	});
+});

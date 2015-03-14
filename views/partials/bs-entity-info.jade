@@ -22,8 +22,7 @@ a.list-group-item(ng-show="e.isExpanded")
 				.ent-attr.small {{ e.investorAttributes.style }}
 				.ent-attr.small {{ e.investorAttributes.orientation }}
 				.ent-attr.small {{ e.investorAttributes.turnover }}
-			.col-xs-6
-				bs-entity-charts(entity="e")
+			bs-entity-charts(entity="e", data="e.industryPositions", value-field='portPercent').col-xs-6
 		.row
 			.col-xs-12
 				h5 Investment Approach

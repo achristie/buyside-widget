@@ -13,9 +13,9 @@
 .r.search-res.scroll-y.c
 	.row(ng-repeat='(k,v) in entities | groupBy: "type"')
 		.col-xs-12
-			h3(ng-class='{"inst-color": k == "Institution", "fund-color": k == "Fund", "contact-color": k == "Contact"}') {{ k }}s
-		masonry.col-xs-12(column-width="1", preserve-order="", load-images='false', masonry-options="{ gutter: 10, isAnimated: true }")
-			.masonry-brick.list-group.entity-list-item.clickable(ng-repeat='e in v | orderBy: "-investorAttributes.eqAssets"', ng-click='toggleEntityView(e, $index)', ng-class="{ 'active': e.isExpanded }")
+			h3.contact-color {{ k }}s
+		masonry.col-xs-12(column-width="1", preserve-order="", load-images='false', masonry-options="{ gutter: 10}")
+			.masonry-brick.list-group.entity-list-item.clickable(ng-repeat='e in v | orderBy: "-investorAttributes.eqAssets"', ng-click='toggleEntityView(e)', ng-class="{ 'active': e.isExpanded }")
 					bs-entity-info(entity="e")
 
 

@@ -1,19 +1,20 @@
-bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
+bsApp.factory('searchEntity', function () {	
 	Entity = function (d) {
 		var self = this;
 
-		self.id = d.investor_id || d.contact_id;
-		self.name = d.investor_name || d.first_nm + ' ' + d.last_nm;
+		self.id = d.investor_id;
+		self.name = d.investor_name;
 		self.type = d.type;
 		self.isExpanded = false;
 		self.investorAttributes = d.investorAttributes || null;
 		self.contactAttributes = d.contactAttributes || null;
+		self.positions = d.positions || [];
+		self.industryPositions = d.industryPositions || [];
 	}
 
 	InvestorAttributes = function (d) {
 		var self = this;
 		
-		self.name = d.investor_name;
 		self.eqAssets = d.equity_asset;
 		self.country = d.country;
 		self.city = d.city;
@@ -49,7 +50,12 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 
 		self.id = d.industry_id;
 		self.name = d.industry_name;
-		self.parentId = 1;
+		self.parentId = d.parent_industry_id;
+		self.level = d.level_name;
+		self.portPercent = d.portfolio_percent;
+		self.value = d.share_amount;
+		self.securityCount = d.security_cnt;
+		self.valueChange = d.share_amount_changed;
 	}
 
 	ContactAttributes = function (d) {
@@ -60,9 +66,6 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 		self.funds = [];
 
 	}
-
-	var ent = [];
-
 	return {
 		Entity: function (d) {
 			return new Entity(d);
@@ -73,55 +76,11 @@ bsApp.factory('globalsearch', function ($http, $q, davosUrl) {
 		ContactAttributes: function (d) {
 			return new ContactAttributes(d);
 		},
-		getEntitiesDetailed: function (arr) {
-			var o = {
-				components: 'Ownership,OwnByInd,OwnByGeo'
-			}
+		Position: function (d) {
+			return new Position(d);
 		},
-		getEntities: function (q) {
-			ent = [];
-			var o = {
-				components: 'Investor,Funds',
-				variables: 'q=' + q,
-				path: 'api/Andrew/BSW/BSWSearch'
-			};
-
-
-			//var url = 'https://davos.app.ipreo.com/rest/api/Andrew/BSWSearch.svc/?components=Investor&q=' + q + '&$format=json&$callback=JSON_CALLBACK';
-			var url = davosUrl.getUrl(o);
-			console.log(o);
-
-			return $http.jsonp(url).then(function (d) {
-				$.each(d.data.Investor, function (i, v) {
-					v.type = "Institution";
-					v.investorAttributes = new InvestorAttributes(v);
-					ent.push(new Entity(v));
-				});
-
-				$.each(d.data.Funds, function (i, v) {
-					v.type = "Fund";
-					v.investorAttributes = new InvestorAttributes(v);
-					ent.push(new Entity(v));
-				});
-				/*
-				$.each(d.data.ContactFundsManaged, function (i, v) {
-					v.type = "Contact";
-					var idx = ent.indexOf(v.id);
-					if (idx < 0) {
-						//create new
-						v.contactAttributes = new ContactAttributes(v);
-						ent.push(new Entity(v));
-					} else {
-						var e = ent[idx]
-						e.contactAttributes.funds.push(v)
-					}
-				})
-				*/
-
-
-				return ent;
-			});
+		IndustryPosition: function (d) {
+			return new IndustryPosition(d);
 		}
 	}
 });
-

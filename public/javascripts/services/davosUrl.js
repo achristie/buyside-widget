@@ -14,7 +14,16 @@ bsApp.factory('davosUrl', function () {
 	return {
 		getUrl: function (o) {
 			token = token ? '&' + token : token;
-			return url + o.path + '.svc/?$components=' + o.components + '&' + o.variables + '&$format=json&$callback=JSON_CALLBACK' + token;
+			if (!o.variables) { o.variables = ''; }
+
+			var t = url + o.path + '.svc/?';
+			if (o.components) {
+				t = t + '$components=' + o.components;
+			}
+			if (o.variables) {
+				t = t + '&' + o.variables;
+			}
+			return t + '&$format=json&$callback=JSON_CALLBACK' + token;
 		}
 	}
 })
